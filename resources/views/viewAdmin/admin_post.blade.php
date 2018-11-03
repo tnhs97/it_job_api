@@ -66,7 +66,7 @@
     <div class="content-wrapper" id="pjax-container">
         <section class="content-header">
             <h1>
-                Order manager
+                Post manager
                 <small> </small>
             </h1>
 
