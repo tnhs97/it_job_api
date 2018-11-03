@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>S-cart Admin  | Order manager</title>
+    <title>IT-Jobs Admin  | Post manager</title>
     @include("viewAdmin.elements.stylesheet")
 
 </head>

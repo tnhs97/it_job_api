@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>S-cart Admin  | Dashboard</title>
+    <title>IT-Jobs Admin  | Dashboard</title>
 
     @include("viewAdmin.elements.stylesheet")
 
