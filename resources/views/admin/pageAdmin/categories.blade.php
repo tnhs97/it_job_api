@@ -88,11 +88,11 @@
                             </i>
                           </button>
                           <span aria-labelledby="btnSearchDrop2" class="dropdown-menu mt-1 dropdown-menu-right">
-                            <a href="{{route('geteditCategory',$category['id'])}}" class="dropdown-item">
+                            <a href="{{route('geteditCategory',$ctaegory['id'])}}" class="dropdown-item">
                               <i class="ft-edit-2">
                               </i> Edit
                             </a>
-                            <a onclick="return xacnhanxoa(' Bạn có chắc muốn xóa không !!! ')" href="{{route('getdeleteCategory',$category['id'])}}" class="dropdown-item">
+                            <a onclick="return xacnhanxoa(' Bạn có chắc muốn xóa không !!! ')" href="{{route('getdeleteCategory',$category[''])}}"id class="dropdown-item">
                               <i class="ft-trash-2">
                               </i> Delete
                             </a>

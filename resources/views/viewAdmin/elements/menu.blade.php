@@ -114,7 +114,7 @@
         </a>
         <ul class="treeview-menu">
           <li>
-            <a href="http://localhost/itjob/public/api/admin_post">
+            <a href="{!! url('/api/admin_post/') !!}">
               <i class="fa fa-shopping-cart">
               </i>
               <span>Post list
@@ -122,7 +122,7 @@
             </a>
           </li>
           <li>
-            <a href="http://localhost/itjob/public/api/admin_post">
+            <a href="{!! url('/api/admin_post/') !!}">
               <i class="fa fa-asterisk">
               </i>
               <span>Post saved

@@ -29,9 +29,9 @@ Route::get('/products/{id}', 'ProductController@show');
 */
 
 
-Route::get('/', function () {
-	return view('welcome');
-});
+// Route::get('/addSpecialprice', function () {
+// 	return view('viewAdmin.addSpecialprice');
+// });
 
 Route::get('index',[
 	'as'=>'index',
@@ -195,6 +195,41 @@ Route::get('deleteCategory/{id}',[
 
 // end categories
 
+
+// Posts
+
+Route::get('admin_post',[
+	'as'=>'admin_post',
+	'uses'=>'PostController@getPosts'
+]);
+
+Route::get('admin_post/add',[
+	'as'=>'getaddPost',
+	'uses'=>'PostController@getAddPost'
+]);
+
+Route::post('admin_post/add',[
+	'as'=>'postaddPost',
+	'uses'=>'PostController@postAddPost'
+]);
+
+Route::get('admin_post/edit/{id}',[
+	'as'=>'geteditPost',
+	'uses'=>'PostController@getEditPost'
+]);
+
+Route::post('admin_post/edit/{id}',[
+	'as'=>'posteditPost',
+	'uses'=>'PostController@postEditPost'
+]);
+
+Route::get('admin_post/deletePost/{id}',[
+	'as'=>'getdeletePost',
+	'uses'=>'PostController@getDeletePost'
+]);
+
+// end posts
+
 // Product
 Route::get('shop_product',[
 	'as'=>'shop_product',
@@ -339,8 +374,3 @@ Route::get('setting',[
 
 
 
-Route::get('admin_post', 'PostController@index');
-Route::get('admin_post/{post}', 'PostController@show');
-Route::post('admin_post', 'PostController@store');
-Route::put('admin_post/{post}', 'PostController@update');
-Route::delete('admin_post/{post}', 'PostController@delete');
