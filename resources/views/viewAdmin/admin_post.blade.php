@@ -87,7 +87,7 @@
                         
 
                         <div class="btn-group pull-right" style="margin-right: 10px">
-                            <a href="http://localhost/itjob/public/api/admin_post/add" class="btn btn-sm btn-success" title="New">
+                            <a href="{!! url('/api/admin_post/add') !!}" class="btn btn-sm btn-success" title="New">
                                 <i class="fa fa-save"></i><span class="hidden-xs">&nbsp;&nbsp;New</span>
                             </a>
                         </div>
