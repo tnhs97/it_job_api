@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use App\Http\Resources\Product as ProductResource;
 use App\Product;
 use App\Post;
+use App\User;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -19,7 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::get('/products/{id}', 'ProductController@show');
-
+ 
 
 /*Route::get('/products', function()
 {
@@ -28,10 +29,6 @@ Route::get('/products/{id}', 'ProductController@show');
 });
 */
 
-
-// Route::get('/addSpecialprice', function () {
-// 	return view('viewAdmin.addSpecialprice');
-// });
 
 Route::get('index',[
 	'as'=>'index',
@@ -163,32 +160,32 @@ Route::get('deleteSmallCategory/{id}',[
 // 
 
 // Categories
-Route::get('shop_category',[
-	'as'=>'shop_category',
+Route::get('categories',[
+	'as'=>'categories',
 	'uses'=>'ControllerCategories@getCategories'
 ]);
 
-Route::get('addCategories',[
+Route::get('categories/add',[
 	'as'=>'getaddCategories',
 	'uses'=>'ControllerCategories@getAddCategories'
 ]);
 
-Route::post('addCategories',[
+Route::post('categories/add',[
 	'as'=>'postaddCategories',
 	'uses'=>'ControllerCategories@postAddCategories'
 ]);
 
-Route::get('editCategory/{id}',[
+Route::get('categories/edit/{id}',[
 	'as'=>'geteditCategory',
 	'uses'=>'ControllerCategories@getEditCategory'
 ]);
 
-Route::post('editCategory/{id}',[
+Route::post('categories/edit/{id}',[
 	'as'=>'posteditCategory',
 	'uses'=>'ControllerCategories@postEditCategory'
 ]);
 
-Route::get('deleteCategory/{id}',[
+Route::get('categories/delete/{id}',[
 	'as'=>'getdeleteCategory',
 	'uses'=>'ControllerCategories@getDeleteCategory'
 ]);
@@ -223,9 +220,44 @@ Route::post('admin_post/edit/{id}',[
 	'uses'=>'PostController@postEditPost'
 ]);
 
-Route::get('admin_post/deletePost/{id}',[
+Route::get('admin_post/delete/{id}',[
 	'as'=>'getdeletePost',
 	'uses'=>'PostController@getDeletePost'
+]);
+
+// end posts
+
+
+// Posts
+
+Route::get('admin_skill',[
+	'as'=>'admin_skill',
+	'uses'=>'SkillController@getSkill'
+]);
+
+Route::get('admin_skill/add',[
+	'as'=>'getaddPost',
+	'uses'=>'SkillController@getAddPost'
+]);
+
+Route::post('admin_skill/add',[
+	'as'=>'postaddPost',
+	'uses'=>'SkillController@postAddPost'
+]);
+
+Route::get('admin_skill/edit/{id}',[
+	'as'=>'geteditPost',
+	'uses'=>'SkillController@getEditPost'
+]);
+
+Route::post('admin_skill/edit/{id}',[
+	'as'=>'posteditPost',
+	'uses'=>'SkillController@postEditPost'
+]);
+
+Route::get('admin_skill/delete/{id}',[
+	'as'=>'getdeleteSkill',
+	'uses'=>'SkillController@getDeleteSkill'
 ]);
 
 // end posts
@@ -352,25 +384,34 @@ Route::get('shop_shipping_status',[
 	'uses'=>'PageAdminController@getShop_shipping_status'
 ]);
 
-
-Route::get('login', function () {
-	return view('viewAdmin.login');
-});
-
+// login
 Route::get('login',[
-	'as'=>'login',
-	'uses'=>'PageAdminController@getLogin'
+	'as'=>'getlogin',
+	'uses'=>'LoginController@getLogin'
 ]);
+Route::post('login',[
+	'as'=>'postlogin',
+	'uses'=>'LoginController@postLogin'
+]);
+// end login
 
-Route::get('setting', function () {
-	return view('viewAdmin.setting');
-});
+// login
+Route::get('logout',[
+	'as'=>'getlogout',
+	'uses'=>'LogoutController@getLogout'
+]);
+// end login
 
+// setting admin
 Route::get('setting',[
-	'as'=>'setting',
-	'uses'=>'PageAdminController@getSetting'
+	'as'=>'getsetting',
+	'uses'=>'SettingController@getSetting'
 ]);
-// end newAdmin
+Route::post('setting',[
+	'as'=>'postsetting',
+	'uses'=>'SettingController@postSetting'
+]);
+// end setting
 
 
 

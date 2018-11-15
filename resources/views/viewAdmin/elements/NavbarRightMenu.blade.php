@@ -24,10 +24,10 @@
                         </li>
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="/test/public/setting" class="btn btn-default btn-flat">Setting</a>
+                                <a href="{!! url('/api/setting') !!}" class="btn btn-default btn-flat">Setting</a>
                             </div>
                             <div class="pull-right">
-                                <a href="/system_admin/auth/logout" class="btn btn-default btn-flat">Logout</a>
+                                <a href="{!! url('/api/logout') !!}" class="btn btn-default btn-flat">Logout</a>
                             </div>
                         </li>
                     </ul>

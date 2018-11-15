@@ -170,38 +170,38 @@
                                     </thead>
 
                                     <tbody>
-                                        @foreach($Post as $posts)
+                                        @foreach($posts as $post)
                                         <tr >
                                             
                                             <td >
-                                                {{ $posts-> id }}
+                                                {{ $post-> id }}
                                             </td>
                                             <td >
-                                                {{ $posts-> Title }}
+                                                {{ $post-> Title }}
                                             </td>
                                             <td >
-                                                {{ $posts-> Description }}
+                                                {{ $post-> Description }}
                                             </td>
                                             <td >
-                                                {{ $posts-> requirement }}
+                                                {{ $post-> requirement }}
                                             </td>
                                             <td >
-                                                {{ $posts-> Salary }}
+                                                {{ $post-> Salary }}
                                             </td>
                                             <td >
-                                                {{ $posts-> Amount_of_people }}
+                                                {{ $post-> Amount_of_people }}
                                             </td>
                                             <td >
-                                                {{ $posts-> Start_day }}
+                                                {{ $post-> Start_day }}
                                             </td>
                                             <td >
-                                                {{ $posts-> End_day }}
+                                                {{ $post-> End_day }}
                                             </td>
                                             <td >
-                                                <a title="Show Customer detail" href="{!! url('/api/admin_post/edit',$posts['id']) !!}">
+                                                <a title="Show Customer detail" href="{!! url('/api/admin_post/edit',$post['id']) !!}">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
-                                                <a href="{!! url('/api/admin_post/deletePost',$posts['id']) !!}"  >
+                                                <a href="{!! url('/api/admin_post/delete',$post['id']) !!}"  >
                                                     <i class="fa fa-trash"></i>
                                                 </a>
                                             </td>
@@ -246,7 +246,8 @@
                             </div>
                             <!-- /.box-body -->
                         </div>
-                    </div></div>
+                    </div>
+                </div>
 
                 </section>
                 <script data-exec-on-popstate>
@@ -276,23 +277,10 @@
 
             <!-- Main Footer -->
             <footer class="main-footer">
-                <!-- To the right -->
-                <div class="pull-right hidden-xs">
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-
-                    <strong>Version</strong>&nbsp;&nbsp; 2.0.4
-
-                </div>
-                <!-- Default to the left -->
-                <strong><a href="https://s-cart.org">S-Cart</a></strong> Free Open Source eCommerce for Business
+                <strong>IT-Jobs</a></strong>
             </footer>
 
         </div>
-
-        <script>
-            function LA() {}
-            LA.token = "2OSjS2rhXhGRhQYksSMBeGgbMZR5CO29pgYG2RLa";
-        </script>
 
         @include("viewAdmin.elements.script")
 

@@ -84,8 +84,8 @@
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
-                <form action="{!! url('/api/admin_post/add') !!}" method="POST" enctype="multipart/form-data" class="form-horizontal" pjax-container>
-                    
+                <form action="{!! url('/api/admin_post/add') !!}" method="POST" enctype="multipart/form-data" class="form-horizontal" >
+
                     <div class="box-body">
 
                         <div class="fields-group">
@@ -117,7 +117,7 @@
                                 <div class="col-sm-8">
 
 
-                                    <textarea name="txtDescription" class="form-control comment" rows="5" placeholder="Input Description"  ></textarea>
+                                    <textarea name="txtDescription" class="form-control comment" rows="5" placeholder="Input Description" autofocus ></textarea>
 
                                     
                                 </div>
@@ -129,7 +129,7 @@
                                 <div class="col-sm-8">
 
 
-                                    <textarea name="txtRequirement" class="form-control comment" rows="5" placeholder="Input Requirement"  ></textarea>
+                                    <textarea name="txtRequirement" class="form-control comment" rows="5" placeholder="Input Requirement" autofocus ></textarea>
 
                                     
                                 </div>
@@ -165,9 +165,9 @@
 
                                     <div class="input-group">
 
-                                        <span class="input-group-addon"><i class="fa fa-pencil fa-fw"></i></span>
-                                        
-                                        <input type="text"  name="txtAmount_of_people" value="" class="form-control name" placeholder="Input Amount of people" />
+                                        <span class="input-group-addon">People</span>
+
+                                        <input style="width: 85px" type="text"  name="txtAmount_of_people" value="" class="form-control price"  />
 
                                         
                                     </div>
@@ -225,7 +225,7 @@
 
                     <div class="box-footer">
 
-                    
+
                         <div class="col-md-2">
                         </div>
 
@@ -262,9 +262,9 @@
                     datatype : "json",
                     dateType:"application/json; charset=utf-8",
                     data : {
-                     id : id
-                 },
-                 success: function(result){
+                       id : id
+                   },
+                   success: function(result){
                     console.log(result);
                     var returnedData = JSON.parse(result);
                     $('#price-old').val(returnedData.price);
@@ -280,9 +280,9 @@
                     datatype : "json",
                     dateType:"application/json; charset=utf-8",
                     data : {
-                     id : id
-                 },
-                 success: function(result){
+                       id : id
+                   },
+                   success: function(result){
                     var returnedData = JSON.parse(result);
                     $('#price-old').val(returnedData.price);
                     var newPrice = returnedData.price * (100 - parseInt($('#off').val())) /100;
@@ -328,7 +328,7 @@
 
 <!-- Main Footer -->
 <footer class="main-footer">
-    
+
     <strong><a href="https://s-cart.org">IT-Jobs</a></strong>
 </footer>
 

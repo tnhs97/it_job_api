@@ -17,11 +17,11 @@ class ControllerCategories extends Controller
 
     public function getCategories(){
         $categories = categories::all();
-      return view('viewAdmin.shop_category',['categories' => $categories]);
+      return view('admin.pageAdmin.categories',['categories' => $categories]);
     }
 
     public function getAddCategories(){
-    	return view('viewAdmin.addCategories');
+    	return view('admin.pageAdmin.addCategories');
     }
 
     public function postAddCategories(CateRequest $req){
@@ -32,19 +32,19 @@ class ControllerCategories extends Controller
     	$cate->descriptions=$req->txt_CateDecription;
     	$req->file('cateImage')->move('image/',$file_image);
     	$cate->save();
-    	return redirect()->route('shop_category')->with(['flash_level'=>'success','flash_message'=>'Success !! Complete add category']);
+    	return redirect()->action('ControllerCategories@getCategories')->with(['flash_level'=>'success','flash_message'=>'Success !! Complete add category']);
     }
 
     public function getDeleteCategory($id){
     	$cate=categories::find($id);
     	$cate->delete($id);
-    	return redirect()->route('shop_category')->with(['flash_level'=>'success','flash_message'=>'Success !! Complete delete category']);
+    	return redirect()->action('ControllerCategories@getCategories')->with(['flash_level'=>'success','flash_message'=>'Success !! Complete delete category']);
     }
 
     public function getEditCategory($id){
     	$data=categories::find($id);
     	$parent=categories::select('id','name','image','descriptions')->get()->toArray();
-    	return view('viewAdmin.editCategory',compact('data','parent','id'));
+    	return view('admin.pageAdmin.editCategory',compact('data','parent','id'));
     }
 
     public function postEditCategory(CateRequest $req,$id){
@@ -55,7 +55,7 @@ class ControllerCategories extends Controller
     	$cate->descriptions=$req->txt_CateDecription;
     	$req->file('cateImage')->move('image/',$file_image);
     	$cate->save();
-    	return redirect()->route('shop_category')->with(['flash_level'=>'success','flash_message'=>'Success !! Complete update category']);
+    	return redirect()->action('ControllerCategories@getCategories')->with(['flash_level'=>'success','flash_message'=>'Success !! Complete update category']);
 
     }
     public function getdemo(){

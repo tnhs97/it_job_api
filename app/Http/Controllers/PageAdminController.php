@@ -6,27 +6,7 @@ use Illuminate\Http\Request;
 
 class PageAdminController extends Controller
 {
-     public function getIndexAdmin(){
-    	return view('admin.pageAdmin.indexAdmin');
-    }
-
-    public function getImageProduct(){
-    	return view('admin.pageAdmin.imageProduct');
-    }
-
-    public function getAddImageProduct(){
-    	return view('admin.pageAdmin.addImageProduct');
-    }
-
-   
-
-   	public function getAddProduct(){
-   		return view('admin.pageAdmin.addProduct');
-   	}
-
-   	public function getEditProduct(){
-   		return view('admin.pageAdmin.editProducts');
-   	}
+     
 
     public function getDashboard(){
       return view('viewAdmin.dashboard');
@@ -76,9 +56,7 @@ class PageAdminController extends Controller
       return view('viewAdmin.login');
     }
 
-    public function getSetting(){
-      return view('viewAdmin.setting');
-    }
+    
 
     
 

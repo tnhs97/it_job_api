@@ -26,12 +26,13 @@ class PostRequest extends FormRequest
     public function rules()
     {
         return [
-            'Title'  => 'required|unique:Post,Title',
-            'Description'    =>  'required',
-            'requirement'    =>  'required',
-            'Amount_of_people'    =>  'required',
-            'Start_day'    =>  'required',
-            'End_day'    =>  'required'
+            'txtTitle'  => 'required',
+            'txtDescription'    =>  'required',
+            'txtRequirement'    =>  'required',
+            'txtSalary'    =>  'required',
+            'txtAmount_of_people'    =>  'required',
+            'dateStart_day'    =>  'required',
+            'dateEnd_day'    =>  'required'
 
       
         ];
@@ -39,12 +40,13 @@ class PostRequest extends FormRequest
 
     public function messages(){
         return [
-            'Title.required'  =>  'Please enter Title  ',
-            'Description.required'  =>  'Please enter descriptions ',
-            'requirement.required'  =>  'Please enter requirement ',
-            'Amount_of_people.required'  =>  'Please enter Amount of people ',
-            'Start_day.required'  =>  'Please enter Start day ',
-            'End_day.required'   => 'Plaese enter End day'
+            'txtTitle.required'  =>  'Please enter Title  ',
+            'txtDescription.required'  =>  'Please enter descriptions ',
+            'txtRequirement.required'  =>  'Please enter requirement ',
+            'txtSalary.required'  =>  'Please enter salary ',
+            'txtAmount_of_people.required'  =>  'Please enter Amount of people ',
+            'dateStart_day.required'  =>  'Please enter Start day ',
+            'dateEnd_day.required'   => 'Plaese enter End day'
          
 
 

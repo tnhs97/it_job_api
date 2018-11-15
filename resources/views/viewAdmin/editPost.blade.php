@@ -84,7 +84,7 @@
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
-                <form method="POST" action="{!! url('/api/admin_post/edit',$data['id']) !!}"  enctype="multipart/form-data" class="form-horizontal" pjax-container>
+                <form method="POST" action="{!! url('/api/admin_post/edit',$data['id']) !!}"  enctype="multipart/form-data" class="form-horizontal">
 
                     <div class="box-body">
 
@@ -102,8 +102,7 @@
 
                                         <span class="input-group-addon"><i class="fa fa-pencil fa-fw"></i></span>
                                         
-                                        <input type="text"  name="txtTitle"  value="{!! old('txtTitle',isset($data)? $data['Title']: null) !!}" class="form-control name" placeholder="Input Title" />
-
+                                        {!! Form::text('txtTitle', $data->Title, array('class' => 'form-control name')) !!}
                                         
                                     </div>
 
@@ -116,25 +115,17 @@
 
                                 <div class="col-sm-8">
 
+                                   {!! Form::textarea('txtDescription', $data->Description, array('class' => 'form-control comment', 'rows' => 5)) !!}
 
-                                    <textarea name="txtDescription"  class="form-control comment" rows="5"  placeholder="Input Description"  >
-                                     {!! old('txtDescription',isset($data)? $data['Description']: null) !!}
-                                 </textarea>
-
-
-                             </div>
-                         </div>
-                         <div class="form-group  ">
+                               </div>
+                           </div>
+                           <div class="form-group  ">
 
                             <label for="requirement" class="col-sm-2  control-label">Requirement</label>
 
                             <div class="col-sm-8">
-
-
-                                <textarea  name="txtRequirement"  class="form-control comment" rows="5" placeholder="Input Requirement"  >
-                                    {!! old('txtRequirement',isset($data)? $data['requirement']: null) !!}
-                                </textarea>
-
+                                
+                                {!! Form::textarea('txtRequirement', $data->requirement, array('class' => 'form-control comment', 'rows' => 5)) !!}
 
                             </div>
                         </div>
@@ -151,7 +142,8 @@
 
                                     <span class="input-group-addon">$</span>
 
-                                    <input style="width: 120px" type="text"  name="txtSalary" value="{!! old('txtSalary',isset($data)? $data['Salary']: null) !!}" class="form-control price" placeholder="Input Salary" />
+                                    <input style="width: 120px" type="text"  name="txtSalary" value="{!! old('txtSalary',isset($data)? $data['Salary']: null) !!}" class="form-control price"  />
+
 
 
                                 </div>
@@ -169,9 +161,9 @@
 
                                 <div class="input-group">
 
-                                    <span class="input-group-addon"><i class="fa fa-pencil fa-fw"></i></span>
+                                    <span class="input-group-addon">People</span>
 
-                                    <input type="text"  name="txtAmount_of_people" value="{!! old('txtAmount_of_people',isset($data)? $data['Amount_of_people']: null) !!}" class="form-control name" placeholder="Input Amount of people" />
+                                    <input style="width: 85px" type="text"  name="txtAmount_of_people" value="{!! old('txtAmount_of_people',isset($data)? $data['Amount_of_people']: null) !!}" class="form-control price"  />
 
 
                                 </div>
@@ -191,7 +183,7 @@
 
                                     <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
 
-                                    <input style="width: 160px" type="text" name="dateStart_day" value="{!! old('dateStart_day',isset($data)? $data['Start_day']: null) !!}" class="form-control date_start" placeholder="Input Date start" />
+                                    <input style="width: 160px" type="text" name="dateStart_day" value="{!! old('dateStart_day',isset($data)? $data['Start_day']: null) !!}" class="form-control date_start"/>
 
 
                                 </div>
@@ -210,7 +202,7 @@
 
                                     <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
 
-                                    <input style="width: 160px" type="text"  name="dateEnd_day" value="{!! old('dateEnd_day',isset($data)? $data['End_day']: null) !!}" class="form-control date_end" placeholder="Input Date end" />
+                                    <input style="width: 160px" type="text"  name="dateEnd_day" value="{!! old('dateEnd_day',isset($data)? $data['End_day']: null) !!}" class="form-control date_end" />
 
 
                                 </div>
@@ -266,9 +258,9 @@
                 datatype : "json",
                 dateType:"application/json; charset=utf-8",
                 data : {
-                   id : id
-               },
-               success: function(result){
+                 id : id
+             },
+             success: function(result){
                 console.log(result);
                 var returnedData = JSON.parse(result);
                 $('#price-old').val(returnedData.price);
@@ -284,9 +276,9 @@
                 datatype : "json",
                 dateType:"application/json; charset=utf-8",
                 data : {
-                   id : id
-               },
-               success: function(result){
+                 id : id
+             },
+             success: function(result){
                 var returnedData = JSON.parse(result);
                 $('#price-old').val(returnedData.price);
                 var newPrice = returnedData.price * (100 - parseInt($('#off').val())) /100;
@@ -333,7 +325,7 @@
 <!-- Main Footer -->
 <footer class="main-footer">
 
-    <strong><a href="https://s-cart.org">IT-Jobs</a></strong>
+    <strong><a href="">IT-Jobs</a></strong>
 </footer>
 
 </div>

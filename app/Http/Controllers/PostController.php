@@ -9,7 +9,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Validator;
 use Illuminate\Http\Request;
-use App\Post;
+use App\posts;
 use App\Http\Requests\PostRequest;
 
 class PostController extends Controller
@@ -19,8 +19,8 @@ class PostController extends Controller
     
 
     public function getPosts(){
-        $Post = Post::all();
-      return view('viewAdmin.admin_post',['Post' => $Post]);
+        $posts = posts::all();
+      return view('viewAdmin.admin_post',['posts' => $posts]);
     }
 
     public function getAddPost(){
@@ -28,10 +28,11 @@ class PostController extends Controller
     }
 
     public function postAddPost(PostRequest $req){
-        $post=new Post;
+        $post=new posts;
         $post->Title=$req->txtTitle;
         $post->Description=$req->txtDescription;
         $post->requirement=$req->txtRequirement;
+        $post->Salary=$req->txtSalary;
         $post->Amount_of_people=$req->txtAmount_of_people;
         $post->Start_day=$req->dateStart_day;
         $post->End_day=$req->dateEnd_day;
@@ -40,25 +41,26 @@ class PostController extends Controller
     }
 
     public function getDeletePost($id){
-        $post=Post::find($id);
+        $post=posts::find($id);
         $post->delete($id);
         return redirect()->action('PostController@getPosts')->with(['flash_level'=>'success','flash_message'=>'Success !! Complete delete Post']);
     }
 
     public function getEditPost($id){
-        $data=Post::find($id);
-        $parent=Post::select('id','Title','Description','requirement','Salary','Amount_of_people','Start_day','End_day')->get()->toArray();
+        $data=posts::find($id);
+        $parent=posts::select('id','Title','Description','requirement','Salary','Amount_of_people','Start_day','End_day')->get()->toArray();
         return view('viewAdmin.editPost',compact('data','parent','id'));
     }
 
     public function postEditPost(PostRequest $req,$id){
-        $post=Post::find($id);
-        $post->Title=$req->txtTitle;
-        $post->Description=$req->txtDescription;
-        $post->requirement=$req->txtRequirement;
-        $post->Amount_of_people=$req->txtAmount_of_people;
-        $post->Start_day=$req->dateStart_day;
-        $post->End_day=$req->dateEnd_day;
+        $post=posts::find($id);
+        $post->Title=$req->get('txtTitle');
+        $post->Description=$req->get('txtDescription');
+        $post->requirement=$req->get('txtRequirement');
+        $post->Salary=$req->get('txtSalary');
+        $post->Amount_of_people=$req->get('txtAmount_of_people');
+        $post->Start_day=$req->get('dateStart_day');
+        $post->End_day=$req->get('dateEnd_day');
         $post->save();
         return redirect()->action('PostController@getPosts')->with(['flash_level'=>'success','flash_message'=>'Success !! Complete update Post']);
 

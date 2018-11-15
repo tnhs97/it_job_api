@@ -63,25 +63,25 @@
         <a href="#">
           <i class="fa fa-folder-open">
           </i>
-          <span>Shop Manager
+          <span>IT-Jobs Manager
           </span>
           <i class="fa fa-angle-left pull-right">
           </i>
         </a>
         <ul class="treeview-menu">
           <li>
-            <a href="{{route('shop_category')}}">
+            <a href="{!! url('/api/admin_skill/') !!}">
               <i class="fa fa-folder-open-o">
               </i>
-              <span>Categories
+              <span>Skill
               </span>
             </a>
           </li>
           <li>
-            <a href="{{route('shop_small_category')}}">
+            <a href="">
               <i class="fa fa-paw">
               </i>
-              <span>Small categories
+              <span>Location
               </span>
             </a>
           </li>

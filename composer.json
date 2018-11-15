@@ -9,6 +9,7 @@
         "csanquer/pdo-service-provider": "~1.1dev",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.7.*",
+        "laravelcollective/html": "5.7.*",
         "laravel/tinker": "^1.0"
     },
     "require-dev": {
@@ -36,6 +37,7 @@
     "extra": {
         "laravel": {
             "dont-discover": [
+                "laravel/dusk"
             ]
         }
     },
@@ -58,4 +60,6 @@
     },
     "minimum-stability": "dev",
     "prefer-stable": true
+
+
 }
