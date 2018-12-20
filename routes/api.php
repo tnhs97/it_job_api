@@ -199,6 +199,10 @@ Route::get('admin_post',[
 	'as'=>'admin_post',
 	'uses'=>'PostController@getPosts'
 ]);
+Route::get('admin_post/{id}',[
+	'as'=>'getid',
+	'uses'=>'PostController@getidPosts'
+]);
 
 Route::get('admin_post/add',[
 	'as'=>'getaddPost',
