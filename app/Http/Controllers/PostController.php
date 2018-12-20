@@ -20,13 +20,9 @@ class PostController extends Controller
 
     public function getPosts(){
         $posts = posts::all();
-      return $posts;
+   //   return view('viewAdmin.admin_post',['posts' => $posts]);
+        return $posts;
     }
-    public function getidPosts($id){
-        $posts = posts::find($id);
-      return $posts;
-    }
-
     public function getAddPost(){
         return view('viewAdmin.addPosts');
     }

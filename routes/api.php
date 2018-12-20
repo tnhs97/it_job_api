@@ -196,13 +196,11 @@ Route::get('categories/delete/{id}',[
 // Posts
 
 Route::get('admin_post',[
+	'middleware' => 'cors',
 	'as'=>'admin_post',
 	'uses'=>'PostController@getPosts'
 ]);
-Route::get('admin_post/{id}',[
-	'as'=>'getid',
-	'uses'=>'PostController@getidPosts'
-]);
+
 
 Route::get('admin_post/add',[
 	'as'=>'getaddPost',
@@ -232,7 +230,7 @@ Route::get('admin_post/delete/{id}',[
 // end posts
 
 
-// Posts
+// Skills
 
 Route::get('admin_skill',[
 	'as'=>'admin_skill',
@@ -264,7 +262,41 @@ Route::get('admin_skill/delete/{id}',[
 	'uses'=>'SkillController@getDeleteSkill'
 ]);
 
-// end posts
+// end skills
+
+// Employer
+
+Route::get('admin_employer',[
+	'as'=>'admin_employer',
+	'uses'=>'ControllerEmployer@getEmployers'
+]);
+
+Route::get('admin_employer/add',[
+	'as'=>'getaddEmployer',
+	'uses'=>'ControllerEmployer@getaddEmployer'
+]);
+
+Route::post('admin_employer/add',[
+	'as'=>'postaddEmployer',
+	'uses'=>'ControllerEmployer@postAddEmployer'
+]);
+
+Route::get('admin_employer/edit/{id}',[
+	'as'=>'geteditEmployer',
+	'uses'=>'ControllerEmployer@getEditEmployer'
+]);
+
+Route::post('admin_employer/edit/{id}',[
+	'as'=>'posteditEmployer',
+	'uses'=>'ControllerEmployer@postEditEmployer'
+]);
+
+Route::get('admin_employer/delete/{id}',[
+	'as'=>'getdeleteEmployer',
+	'uses'=>'ControllerEmployer@getDeleteEmployer'
+]);
+
+// end employer
 
 // Product
 Route::get('shop_product',[
