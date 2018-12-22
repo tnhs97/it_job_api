@@ -16,7 +16,7 @@ class ControllerProduct extends Controller
 
     public function getProduct(){
         $products = products::all();
-        return view('viewAdmin.shop_product',['products' => $products]);
+		return view('viewAdmin.shop_product',['products' => $products]);
     }
 
     public function getAddProduct(){

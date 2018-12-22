@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class products extends Model
 {
     protected $table="products";
-
+    
     public function smallCategories(){
     	return $this->belongsTo('app\smallCategories','id_small_category','id');
     }
