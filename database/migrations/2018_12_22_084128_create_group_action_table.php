@@ -29,7 +29,7 @@ class CreateGroupActionTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::dropIfExists('group_action');
+		Schema::dropIfExists('group_action_model');
 	}
 
 }

@@ -15,8 +15,8 @@ class CreateAccountTable extends Migration
     {
         Schema::create('accounts', function (Blueprint $table) {
             $table->integer('id', true);
-            $table->string('email', 50);
-            $table->string('password', 50);
+            $table->string('email', 50)->unique();
+            $table->string('password', 200);
             $table->string('name', 50);
             $table->string('phone', 20);
             $table->string('address', 200);
@@ -24,7 +24,8 @@ class CreateAccountTable extends Migration
             $table->boolean('status');
             $table->boolean('gender');
             $table->date('dob');
-            $table->morphs('accountable');
+			$table->morphs('accountable');
+			$table->rememberToken();
         });
     }
 

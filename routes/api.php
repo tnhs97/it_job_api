@@ -14,8 +14,8 @@ use Illuminate\Http\Request;
 |
  */
 // Authentication
-Route::post('register', 'AuthController@register');
-Route::post('login', 'AuthController@login');
+Route::post('account/register', 'AuthController@register');
+Route::post('account/login', 'AuthController@login');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
@@ -408,7 +408,7 @@ Route::get('shop_shipping_status', [
     'uses' => 'PageAdminController@getShop_shipping_status',
 ]);
 
-// login
+//login
 Route::get('login', [
     'as' => 'getlogin',
     'uses' => 'LoginController@getLogin',

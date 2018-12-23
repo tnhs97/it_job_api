@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Employer extends Model
 {
     protected $table = "employers";
+    public $timestamps=false;
+
+    protected $fillable = ['employer_type','description','location_id'];
     public function account()
     {
         return $this->morphOne('App\Account', 'accountable');
