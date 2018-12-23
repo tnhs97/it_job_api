@@ -15,7 +15,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $table = 'admin';
+    protected $table = 'users';
     protected $fillable = [
         'username', 'password', 
     ];
@@ -28,4 +28,10 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function account()
+    {
+        return $this->morphOne('App\Account', 'accountable');
+    }
+
 }

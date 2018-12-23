@@ -1,10 +1,8 @@
 <?php
 
-use Illuminate\Http\Request;
-use App\Http\Resources\Product as ProductResource;
-use App\Product;
 use App\Post;
 use App\User;
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,97 +12,98 @@ use App\User;
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
-*/
+ */
+// Authentication
+Route::post('register', 'AuthController@register');
+Route::post('login', 'AuthController@login');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::get('/products/{id}', 'ProductController@show');
- 
 
 /*Route::get('/products', function()
 {
-	$products = Product::find(2);
-	return new ProductResource($products);
+$products = Product::find(2);
+return new ProductResource($products);
 });
-*/
+ */
 
-
-Route::get('index',[
-	'as'=>'index',
-	'uses'=>'controllerPage@getIndex'
+Route::get('index', [
+    'as' => 'index',
+    'uses' => 'controllerPage@getIndex',
 ]);
 
-Route::get('collection_women/{type}',[
-	'as'=>'collection_women',
-	'uses'=>'controllerPage@getCollectionWomen'
+Route::get('collection_women/{type}', [
+    'as' => 'collection_women',
+    'uses' => 'controllerPage@getCollectionWomen',
 ]);
 
-Route::get('listingMenu',[
-	'as'=>'listingMenu',
-	'uses'=>'controllerPage@getListingMenu'
+Route::get('listingMenu', [
+    'as' => 'listingMenu',
+    'uses' => 'controllerPage@getListingMenu',
 ]);
 
-Route::get('customerInformation',[
-	'as'=>'getCustomerInformation',
-	'uses'=>'controllerPage@getCustomerInformation'
+Route::get('customerInformation', [
+    'as' => 'getCustomerInformation',
+    'uses' => 'controllerPage@getCustomerInformation',
 ]);
 
-Route::get('shippingMethod',[
-	'as'=>'getShippingMethod',
-	'uses'=>'controllerPage@getShippingMethod'
+Route::get('shippingMethod', [
+    'as' => 'getShippingMethod',
+    'uses' => 'controllerPage@getShippingMethod',
 ]);
 
-Route::get('paymentMethod',[
-	'as'=>'getPaymentMethod',
-	'uses'=>'controllerPage@getPaymentMethod'
+Route::get('paymentMethod', [
+    'as' => 'getPaymentMethod',
+    'uses' => 'controllerPage@getPaymentMethod',
 ]);
 
 /*
 Route::get('listing',[
-	'as'=>'listing',
-	'uses'=>'controllerPage@getListing'
+'as'=>'listing',
+'uses'=>'controllerPage@getListing'
 ]);
-*/
+ */
 
-Route::get('productTitle/{id}',[
-	'as'=>'productTitle',
-	'uses'=>'controllerPage@getProductTitle'
-]);
-
-Route::get('cart',[
-	'as'=>'cart',
-	'uses'=>'controllerPage@getCart'
+Route::get('productTitle/{id}', [
+    'as' => 'productTitle',
+    'uses' => 'controllerPage@getProductTitle',
 ]);
 
-Route::get('add-to-cart/{id}',[
-	'as'=>'addCart',
-	'uses'=>'controllerPage@getAddCart'
+Route::get('cart', [
+    'as' => 'cart',
+    'uses' => 'controllerPage@getCart',
 ]);
 
-Route::post('get-add-to-cart/{id}',[
-	'as'=>'AddCartTitle',
-	'uses'=>'controllerPage@getAddCartTitle'
+Route::get('add-to-cart/{id}', [
+    'as' => 'addCart',
+    'uses' => 'controllerPage@getAddCart',
 ]);
 
-Route::get('del-cart/{id}',[
-	'as'=>'deleteCart',
-	'uses'=>'controllerPage@getDeleteCart'
+Route::post('get-add-to-cart/{id}', [
+    'as' => 'AddCartTitle',
+    'uses' => 'controllerPage@getAddCartTitle',
 ]);
 
-Route::get('update-cart',[
-	'as'=>'updateCart',
-	'uses'=>'controllerPage@getUpdateCart'
+Route::get('del-cart/{id}', [
+    'as' => 'deleteCart',
+    'uses' => 'controllerPage@getDeleteCart',
 ]);
 
-Route::get('order',[
-	'as'=>'orders',
-	'uses'=>'controllerPage@getOrder'
+Route::get('update-cart', [
+    'as' => 'updateCart',
+    'uses' => 'controllerPage@getUpdateCart',
 ]);
 
-Route::post('order',[
-	'as'=>'orders',
-	'uses'=>'controllerPage@postOrder'
+Route::get('order', [
+    'as' => 'orders',
+    'uses' => 'controllerPage@getOrder',
+]);
+
+Route::post('order', [
+    'as' => 'orders',
+    'uses' => 'controllerPage@postOrder',
 ]);
 
 //
@@ -118,341 +117,322 @@ Route::post('order',[
 //
 //
 
-Route::get('indexAdmin',[
-	'as'=>'indexAdmin',
-	'uses'=>'PageAdminController@getIndexAdmin'
+Route::get('indexAdmin', [
+    'as' => 'indexAdmin',
+    'uses' => 'PageAdminController@getIndexAdmin',
 ]);
-
 
 // start small categories
-// 
-// 
-// 
-Route::get('shop_small_category',[
-	'as'=>'shop_small_category',
-	'uses'=>'ControllerSmallCategories@getSmallCategories'
+//
+//
+//
+Route::get('shop_small_category', [
+    'as' => 'shop_small_category',
+    'uses' => 'ControllerSmallCategories@getSmallCategories',
 ]);
-Route::get('addSmallCategory',[
-	'as'=>'getaddSmallCategory',
-	'uses'=>'ControllerSmallCategories@getaddSmallCategories'
+Route::get('addSmallCategory', [
+    'as' => 'getaddSmallCategory',
+    'uses' => 'ControllerSmallCategories@getaddSmallCategories',
 ]);
-Route::post('addSmallCategory',[
-	'as'=>'postaddSmallCategory',
-	'uses'=>'ControllerSmallCategories@postAddSmallCategories'
+Route::post('addSmallCategory', [
+    'as' => 'postaddSmallCategory',
+    'uses' => 'ControllerSmallCategories@postAddSmallCategories',
 ]);
 
-Route::get('editSmallCategory/{id}',[
-	'as'=>'geteditSmallCategory',
-	'uses'=>'ControllerSmallCategories@getEditSmallCategory'
+Route::get('editSmallCategory/{id}', [
+    'as' => 'geteditSmallCategory',
+    'uses' => 'ControllerSmallCategories@getEditSmallCategory',
 ]);
-Route::post('editSmallCategory/{id}',[
-	'as'=>'posteditSmallCategory',
-	'uses'=>'ControllerSmallCategories@postEditSmallCategory'
+Route::post('editSmallCategory/{id}', [
+    'as' => 'posteditSmallCategory',
+    'uses' => 'ControllerSmallCategories@postEditSmallCategory',
 ]);
-Route::get('deleteSmallCategory/{id}',[
-	'as'=>'getdeleteSmallCategory',
-	'uses'=>'ControllerSmallCategories@getDeleteSmallCategory'
+Route::get('deleteSmallCategory/{id}', [
+    'as' => 'getdeleteSmallCategory',
+    'uses' => 'ControllerSmallCategories@getDeleteSmallCategory',
 ]);
 
 // end small categories
-// 
-// 
-// 
+//
+//
+//
 
 // Categories
-Route::get('categories',[
-	'as'=>'categories',
-	'uses'=>'ControllerCategories@getCategories'
+Route::get('categories', [
+    'as' => 'categories',
+    'uses' => 'ControllerCategories@getCategories',
 ]);
 
-Route::get('categories/add',[
-	'as'=>'getaddCategories',
-	'uses'=>'ControllerCategories@getAddCategories'
+Route::get('categories/add', [
+    'as' => 'getaddCategories',
+    'uses' => 'ControllerCategories@getAddCategories',
 ]);
 
-Route::post('categories/add',[
-	'as'=>'postaddCategories',
-	'uses'=>'ControllerCategories@postAddCategories'
+Route::post('categories/add', [
+    'as' => 'postaddCategories',
+    'uses' => 'ControllerCategories@postAddCategories',
 ]);
 
-Route::get('categories/edit/{id}',[
-	'as'=>'geteditCategory',
-	'uses'=>'ControllerCategories@getEditCategory'
+Route::get('categories/edit/{id}', [
+    'as' => 'geteditCategory',
+    'uses' => 'ControllerCategories@getEditCategory',
 ]);
 
-Route::post('categories/edit/{id}',[
-	'as'=>'posteditCategory',
-	'uses'=>'ControllerCategories@postEditCategory'
+Route::post('categories/edit/{id}', [
+    'as' => 'posteditCategory',
+    'uses' => 'ControllerCategories@postEditCategory',
 ]);
 
-Route::get('categories/delete/{id}',[
-	'as'=>'getdeleteCategory',
-	'uses'=>'ControllerCategories@getDeleteCategory'
+Route::get('categories/delete/{id}', [
+    'as' => 'getdeleteCategory',
+    'uses' => 'ControllerCategories@getDeleteCategory',
 ]);
 
 // end categories
 
-
 // Posts
 
-Route::get('admin_post',[
-	'middleware' => 'cors',
-	'as'=>'admin_post',
-	'uses'=>'PostController@getPosts'
-]);
-Route::get('admin_post_api',[
+Route::get('admin_post', [
     'middleware' => 'cors',
-    'as'=>'admin_post_api',
-    'uses'=>'PostController@getPostsAPI'
+    'as' => 'admin_post',
+    'uses' => 'PostController@getPosts',
+]);
+Route::get('admin_post_api', [
+    'middleware' => 'cors',
+    'as' => 'admin_post_api',
+    'uses' => 'PostController@getPostsAPI',
 ]);
 
-
-Route::get('admin_post/add',[
-	'as'=>'getaddPost',
-	'uses'=>'PostController@getAddPost'
+Route::get('admin_post/add', [
+    'as' => 'getaddPost',
+    'uses' => 'PostController@getAddPost',
 ]);
 
-Route::post('admin_post/add',[
-	'as'=>'postaddPost',
-	'uses'=>'PostController@postAddPost'
+Route::post('admin_post/add', [
+    'as' => 'postaddPost',
+    'uses' => 'PostController@postAddPost',
 ]);
 
-Route::get('admin_post/edit/{id}',[
-	'as'=>'geteditPost',
-	'uses'=>'PostController@getEditPost'
+Route::get('admin_post/edit/{id}', [
+    'as' => 'geteditPost',
+    'uses' => 'PostController@getEditPost',
 ]);
 
-Route::post('admin_post/edit/{id}',[
-	'as'=>'posteditPost',
-	'uses'=>'PostController@postEditPost'
+Route::post('admin_post/edit/{id}', [
+    'as' => 'posteditPost',
+    'uses' => 'PostController@postEditPost',
 ]);
 
-Route::get('admin_post/delete/{id}',[
-	'as'=>'getdeletePost',
-	'uses'=>'PostController@getDeletePost'
+Route::get('admin_post/delete/{id}', [
+    'as' => 'getdeletePost',
+    'uses' => 'PostController@getDeletePost',
 ]);
 
 // end posts
 
-
 // Skills
 
-Route::get('admin_skill',[
-	'as'=>'admin_skill',
-	'uses'=>'SkillController@getSkill'
+Route::get('admin_skill', [
+    'as' => 'admin_skill',
+    'uses' => 'SkillController@getSkill',
 ]);
 
-Route::get('admin_skill/add',[
-	'as'=>'getaddPost',
-	'uses'=>'SkillController@getAddPost'
+Route::get('admin_skill/add', [
+    'as' => 'getaddPost',
+    'uses' => 'SkillController@getAddPost',
 ]);
 
-Route::post('admin_skill/add',[
-	'as'=>'postaddPost',
-	'uses'=>'SkillController@postAddPost'
+Route::post('admin_skill/add', [
+    'as' => 'postaddPost',
+    'uses' => 'SkillController@postAddPost',
 ]);
 
-Route::get('admin_skill/edit/{id}',[
-	'as'=>'geteditPost',
-	'uses'=>'SkillController@getEditPost'
+Route::get('admin_skill/edit/{id}', [
+    'as' => 'geteditPost',
+    'uses' => 'SkillController@getEditPost',
 ]);
 
-Route::post('admin_skill/edit/{id}',[
-	'as'=>'posteditPost',
-	'uses'=>'SkillController@postEditPost'
+Route::post('admin_skill/edit/{id}', [
+    'as' => 'posteditPost',
+    'uses' => 'SkillController@postEditPost',
 ]);
 
-Route::get('admin_skill/delete/{id}',[
-	'as'=>'getdeleteSkill',
-	'uses'=>'SkillController@getDeleteSkill'
+Route::get('admin_skill/delete/{id}', [
+    'as' => 'getdeleteSkill',
+    'uses' => 'SkillController@getDeleteSkill',
 ]);
 
 // end skills
 
 // Employer
 
-Route::get('admin_employer',[
-	'as'=>'admin_employer',
-	'uses'=>'ControllerEmployer@getEmployers'
+Route::get('admin_employer', [
+    'as' => 'admin_employer',
+    'uses' => 'ControllerEmployer@getEmployers',
 ]);
 
-Route::get('admin_employer/add',[
-	'as'=>'getaddEmployer',
-	'uses'=>'ControllerEmployer@getaddEmployer'
+Route::get('admin_employer/add', [
+    'as' => 'getaddEmployer',
+    'uses' => 'ControllerEmployer@getaddEmployer',
 ]);
 
-Route::post('admin_employer/add',[
-	'as'=>'postaddEmployer',
-	'uses'=>'ControllerEmployer@postAddEmployer'
+Route::post('admin_employer/add', [
+    'as' => 'postaddEmployer',
+    'uses' => 'ControllerEmployer@postAddEmployer',
 ]);
 
-Route::get('admin_employer/edit/{id}',[
-	'as'=>'geteditEmployer',
-	'uses'=>'ControllerEmployer@getEditEmployer'
+Route::get('admin_employer/edit/{id}', [
+    'as' => 'geteditEmployer',
+    'uses' => 'ControllerEmployer@getEditEmployer',
 ]);
 
-Route::post('admin_employer/edit/{id}',[
-	'as'=>'posteditEmployer',
-	'uses'=>'ControllerEmployer@postEditEmployer'
+Route::post('admin_employer/edit/{id}', [
+    'as' => 'posteditEmployer',
+    'uses' => 'ControllerEmployer@postEditEmployer',
 ]);
 
-Route::get('admin_employer/delete/{id}',[
-	'as'=>'getdeleteEmployer',
-	'uses'=>'ControllerEmployer@getDeleteEmployer'
+Route::get('admin_employer/delete/{id}', [
+    'as' => 'getdeleteEmployer',
+    'uses' => 'ControllerEmployer@getDeleteEmployer',
 ]);
 
 // end employer
 
 // Product
-Route::get('shop_product',[
-	'as'=>'shop_product',
-	'uses'=>'ControllerProduct@getProduct'
+Route::get('shop_product', [
+    'as' => 'shop_product',
+    'uses' => 'ControllerProduct@getProduct',
 ]);
 
-Route::get('addProduct',[
-	'as'=>'getaddProduct',
-	'uses'=>'ControllerProduct@getAddProduct'
+Route::get('addProduct', [
+    'as' => 'getaddProduct',
+    'uses' => 'ControllerProduct@getAddProduct',
 ]);
 
-Route::post('addProduct',[
-	'as'=>'postaddProduct',
-	'uses'=>'ControllerProduct@postAddProduct'
+Route::post('addProduct', [
+    'as' => 'postaddProduct',
+    'uses' => 'ControllerProduct@postAddProduct',
 ]);
 
-Route::get('editProduct/{id}',[
-	'as'=>'geteditProduct',
-	'uses'=>'ControllerProduct@getEditProduct'
+Route::get('editProduct/{id}', [
+    'as' => 'geteditProduct',
+    'uses' => 'ControllerProduct@getEditProduct',
 ]);
 
-Route::post('editProduct/{id}',[
-	'as'=>'posteditProduct',
-	'uses'=>'ControllerProduct@postEditProduct'
+Route::post('editProduct/{id}', [
+    'as' => 'posteditProduct',
+    'uses' => 'ControllerProduct@postEditProduct',
 ]);
 
-Route::get('deleteProduct/{id}',[
-	'as'=>'getdeleteProduct',
-	'uses'=>'ControllerProduct@getDeleteProduct'
+Route::get('deleteProduct/{id}', [
+    'as' => 'getdeleteProduct',
+    'uses' => 'ControllerProduct@getDeleteProduct',
 ]);
 
 // end product
 
-Route::get('imageProduct',[
-	'as'=>'imageProduct',
-	'uses'=>'PageAdminController@getImageProduct'
+Route::get('imageProduct', [
+    'as' => 'imageProduct',
+    'uses' => 'PageAdminController@getImageProduct',
 ]);
 
-Route::get('addImageProduct',[
-	'as'=>'addImageProduct',
-	'uses'=>'PageAdminController@getAddImageProduct'
+Route::get('addImageProduct', [
+    'as' => 'addImageProduct',
+    'uses' => 'PageAdminController@getAddImageProduct',
 ]);
 
-
-
-Route::get('products',[
-	'as'=>'products',
-	'uses'=>'PageAdminController@getproduct'
+Route::get('products', [
+    'as' => 'products',
+    'uses' => 'PageAdminController@getproduct',
 ]);
 
-Route::get('addProduct',[
-	'as'=>'addProduct',
-	'uses'=>'PageAdminController@getAddProduct'
+Route::get('addProduct', [
+    'as' => 'addProduct',
+    'uses' => 'PageAdminController@getAddProduct',
 ]);
 
-Route::get('editProducts',[
-	'as'=>'editProducts',
-	'uses'=>'PageAdminController@getEditProduct'
+Route::get('editProducts', [
+    'as' => 'editProducts',
+    'uses' => 'PageAdminController@getEditProduct',
 ]);
 
-
-Route::get('demo',[
-	'as'=>'demo',
-	'uses'=>'ControllerCategories@getdemo'
+Route::get('demo', [
+    'as' => 'demo',
+    'uses' => 'ControllerCategories@getdemo',
 ]);
-
-
 
 // end Admin
 
+// new Admin
+//
+//
+//
 
-
-// new Admin 
-// 
-// 
-// 
-
-Route::get('dashboard',[
-	'as'=>'dashboard',
-	'uses'=>'PageAdminController@getDashboard'
+Route::get('dashboard', [
+    'as' => 'dashboard',
+    'uses' => 'PageAdminController@getDashboard',
 ]);
 
-Route::get('banner',[
-	'as'=>'banner',
-	'uses'=>'PageAdminController@getBanner'
+Route::get('banner', [
+    'as' => 'banner',
+    'uses' => 'PageAdminController@getBanner',
 ]);
 
-Route::get('language',[
-	'as'=>'language',
-	'uses'=>'PageAdminController@getLanguager'
+Route::get('language', [
+    'as' => 'language',
+    'uses' => 'PageAdminController@getLanguager',
 ]);
 
-Route::get('shop_brand',[
-	'as'=>'shop_brand',
-	'uses'=>'PageAdminController@getShop_brand'
+Route::get('shop_brand', [
+    'as' => 'shop_brand',
+    'uses' => 'PageAdminController@getShop_brand',
 ]);
 
-
-
-
-
-Route::get('shop_customer',[
-	'as'=>'shop_customer',
-	'uses'=>'PageAdminController@getShop_customery'
+Route::get('shop_customer', [
+    'as' => 'shop_customer',
+    'uses' => 'PageAdminController@getShop_customery',
 ]);
 
-
-Route::get('shop_product',[
-	'as'=>'shop_product',
-	'uses'=>'PageAdminController@getShop_productr'
+Route::get('shop_product', [
+    'as' => 'shop_product',
+    'uses' => 'PageAdminController@getShop_productr',
 ]);
 
-Route::get('shop_shipping',[
-	'as'=>'shop_shipping',
-	'uses'=>'PageAdminController@getShop_shipping'
+Route::get('shop_shipping', [
+    'as' => 'shop_shipping',
+    'uses' => 'PageAdminController@getShop_shipping',
 ]);
 
-Route::get('shop_shipping_status',[
-	'as'=>'shop_shipping_status',
-	'uses'=>'PageAdminController@getShop_shipping_status'
+Route::get('shop_shipping_status', [
+    'as' => 'shop_shipping_status',
+    'uses' => 'PageAdminController@getShop_shipping_status',
 ]);
 
 // login
-Route::get('login',[
-	'as'=>'getlogin',
-	'uses'=>'LoginController@getLogin'
+Route::get('login', [
+    'as' => 'getlogin',
+    'uses' => 'LoginController@getLogin',
 ]);
-Route::post('login',[
-	'as'=>'postlogin',
-	'uses'=>'LoginController@postLogin'
+Route::post('login', [
+    'as' => 'postlogin',
+    'uses' => 'LoginController@postLogin',
 ]);
 // end login
 
 // login
-Route::get('logout',[
-	'as'=>'getlogout',
-	'uses'=>'LogoutController@getLogout'
+Route::get('logout', [
+    'as' => 'getlogout',
+    'uses' => 'LogoutController@getLogout',
 ]);
 // end login
 
 // setting admin
-Route::get('setting',[
-	'as'=>'getsetting',
-	'uses'=>'SettingController@getSetting'
+Route::get('setting', [
+    'as' => 'getsetting',
+    'uses' => 'SettingController@getSetting',
 ]);
-Route::post('setting',[
-	'as'=>'postsetting',
-	'uses'=>'SettingController@postSetting'
+Route::post('setting', [
+    'as' => 'postsetting',
+    'uses' => 'SettingController@postSetting',
 ]);
 // end setting
-
-
-

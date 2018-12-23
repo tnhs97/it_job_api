@@ -4,11 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class employer extends Model
+class Employer extends Model
 {
-   	protected $table="employer";
-    public $timestamps=false;
-    public function  location(){
-        return $this->hasMany('app\location','id_Location','id');
+    protected $table = "employers";
+    public function account()
+    {
+        return $this->morphOne('App\Account', 'accountable');
     }
+
 }
