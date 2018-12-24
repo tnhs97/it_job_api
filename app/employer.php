@@ -9,7 +9,7 @@ class Employer extends Model
     protected $table = "employers";
     public $timestamps=false;
 
-    protected $fillable = ['employer_type','description','location_id'];
+    protected $guarded = [];
     public function account()
     {
         return $this->morphOne('App\Account', 'accountable');

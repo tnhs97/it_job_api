@@ -29,5 +29,9 @@ class Account extends Authenticatable implements JWTSubject
     {
       return [];
     }
+    public function groups()
+    {
+        return $this->belongsToMany('App\Group');
+    }
 
 }

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Account;
-use App\User;
 use App\Employer;
+use App\User;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
@@ -19,32 +19,24 @@ class AuthController extends Controller
     {
 
         $account = ([
-            'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
-            'phone' => $request->phone,
-            'address' => $request->address,
-            'is_active' => '0',
-            'status' => '1',
-            'gender' => $request->gender,
-            'dob' => $request->dob,
         ]);
         if ($request->accountable_type == 'User') {
             $user = User::firstOrCreate([
-                'rank' => 0,
-                'location_id' => $request->location_id,
+                'name' => $request->name,
             ]);
-
             $user->account()->firstOrCreate($account);
         } else {
             $employer = Employer::firstOrCreate([
-                'employer_type' => '1',
+                'name' => $request->name,
                 'description' => $request->description,
-                'location_id' => $request->location_id,
+                'id_location' => $request->id_location,
+
             ]);
             $employer->account()->firstOrCreate($account);
         }
-        $account= new Account($account);
+        $account = new Account($account);
         $token = auth()->login($account);
 
         return $this->respondWithToken($token);

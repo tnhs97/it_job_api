@@ -11,11 +11,11 @@ class Location extends Model
         return $this->belongsTo('app\employer','id_Location','id');
     }
 
-    public function userInLocation(){
+    public function userInLocations(){
         return $this->hasMany('App\UserInLocation');
     }
 
-    public function employerInLocation(){
+    public function employerInLocations(){
         return $this->hasMany('App\EmployerInLocation');
     }
 
