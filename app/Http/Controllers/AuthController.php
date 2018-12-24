@@ -18,29 +18,28 @@ class AuthController extends Controller
     public function register(Request $request)
     {
 
-        // $account = ([
-        //     'email' => $request->email,
-        //     'password' => bcrypt($request->password),
-        // ]);
-        // if ($request->accountable_type == 'User') {
-        //     $user = User::firstOrCreate([
-        //         'name' => $request->name,
-        //     ]);
-        //     $user->account()->firstOrCreate($account);
-        // } else {
-        //     $employer = Employer::firstOrCreate([
-        //         'name' => $request->name,
-        //         'description' => $request->description,
-        //         'id_location' => $request->id_location,
+        $account = ([
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+        ]);
+        if ($request->accountable_type == 'User') {
+            $user = User::firstOrCreate([
+                'name' => $request->name,
+            ]);
+            $user->account()->firstOrCreate($account);
+        } else {
+            $employer = Employer::firstOrCreate([
+                'name' => $request->name,
+                'description' => $request->description,
+                'id_location' => $request->id_location,
 
-        //     ]);
-        //     $employer->account()->firstOrCreate($account);
-        // }
-        // $account = new Account($account);
-        // $token = auth()->login($account);
+            ]);
+            $employer->account()->firstOrCreate($account);
+        }
+        $account = new Account($account);
+        $token = auth()->login($account);
 
-        // return $this->respondWithToken($token);
-        echo 'llll';
+        return $this->respondWithToken($token);
     }
 
     /**
