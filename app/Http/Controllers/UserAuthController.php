@@ -55,7 +55,8 @@ class UserAuthController extends Controller
         // if (!$token = auth()->attempt($credentials)) {
         //     return response()->json(['error' => 'Unauthorized'], 401);
         // }
-        return response()->json(['a' => $request->email, 'b'=>$request->all(), 'c'=>$request->data]);
+        $data = parse_qs($request->all());
+        return response()->json(['a' => $request->email, 'b' => $data, 'c' => $request->data]);
         return $this->respondWithToken($token);
     }
     /**
@@ -63,6 +64,17 @@ class UserAuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
+    public function parse_qs($data)
+    {
+        $data = preg_replace_callback('/(?:^|(?<=&))[^=[]+/', function ($match) {
+            return bin2hex(urldecode($match[0]));
+        }, $data);
+
+        parse_str($data, $values);
+
+        return array_combine(array_map('hex2bin', array_keys($values)), $values);
+    }
+
     public function me()
     {
         $user = User::findOrFail(auth()->user()->accountable_id);
