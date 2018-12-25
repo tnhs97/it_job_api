@@ -29,7 +29,7 @@ class UserAuthController extends Controller
     {
 
         $account = ([
-            'email' => $request->email, 
+            'email' => $request->email,
             'password' => bcrypt($request->password),
         ]);
         $user = User::firstOrCreate([
@@ -50,12 +50,12 @@ class UserAuthController extends Controller
      */
     public function login(Request $request)
     {
-        // $credentials = $request->only(['email', 'password']);
-        // if (!$token = auth()->attempt($credentials)) {
-            return response()->json(['error' => $request]);
-        // }
+        $credentials = $request->only(['email', 'password']);
+        if (!$token = auth()->attempt($credentials)) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
 
-        // return $this->respondWithToken($token);
+        return $this->respondWithToken($token);
     }
     /**
      * Get the authenticated User.
