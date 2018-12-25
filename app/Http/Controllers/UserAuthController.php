@@ -52,7 +52,7 @@ class UserAuthController extends Controller
     {
         // $credentials = $request->only(['email', 'password']);
         // if (!$token = auth()->attempt($credentials)) {
-            return response()->json($request->getBody());
+            return response()->json(['error' => $request->getContent()]);
         // }
 
         return $this->respondWithToken($token);
