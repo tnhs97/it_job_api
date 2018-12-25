@@ -48,22 +48,6 @@ class UserAuthController extends Controller
      * @param Illuminate\Http\Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function login(Request $request)
-    {
-        // $credentials = $request->only(['email', 'password']);
-
-        // if (!$token = auth()->attempt($credentials)) {
-        //     return response()->json(['error' => 'Unauthorized'], 401);
-        // }
-        $data = parse_qs($request->all());
-        return response()->json(['a' => $request->email, 'b' => $data, 'c' => $request->data]);
-        return $this->respondWithToken($token);
-    }
-    /**
-     * Get the authenticated User.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function parse_qs($data)
     {
         $data = preg_replace_callback('/(?:^|(?<=&))[^=[]+/', function ($match) {
@@ -74,6 +58,23 @@ class UserAuthController extends Controller
 
         return array_combine(array_map('hex2bin', array_keys($values)), $values);
     }
+
+    public function login(Request $request)
+    {
+        // $credentials = $request->only(['email', 'password']);
+
+        // if (!$token = auth()->attempt($credentials)) {
+        //     return response()->json(['error' => 'Unauthorized'], 401);
+        // }
+        $data = UserAuthController::parse_qs($request);
+        return response()->json(['a' => $request->email, 'b' => $request->all(), 'c' => $request->data]);
+        return $this->respondWithToken($token);
+    }
+    /**
+     * Get the authenticated User.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
 
     public function me()
     {
