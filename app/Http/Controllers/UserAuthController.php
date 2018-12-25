@@ -50,12 +50,12 @@ class UserAuthController extends Controller
      */
     public function login(Request $request)
     {
-        $credentials = $request->getContent()->only(['email', 'password']);
+        // $credentials = $request->only(['email', 'password']);
 
-        if (!$token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
-        }
-
+        // if (!$token = auth()->attempt($credentials)) {
+        //     return response()->json(['error' => 'Unauthorized'], 401);
+        // }
+        return response()->json(['a' => $request->email, 'b'=>$request->all(), 'c'=>$request->data]);
         return $this->respondWithToken($token);
     }
     /**
