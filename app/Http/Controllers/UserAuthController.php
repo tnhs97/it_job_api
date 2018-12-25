@@ -53,10 +53,10 @@ class UserAuthController extends Controller
     {
         $credentials = $request->only(['email', 'password']);
 
-        // if (!$token = auth()->attempt($credentials)) {
-        //     return response()->json(['error' => 'Unauthorized'], 401);
-        // }
-        return response()->json(['a' => $credentials, 'b' => $request->input('data.email'), 'c' => $request->data]);
+        if (!$token = auth()->attempt($credentials)) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+
         return $this->respondWithToken($token);
     }
     /**
