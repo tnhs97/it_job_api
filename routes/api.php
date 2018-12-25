@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
  */
 // Authentication for user
 Route::group([
-    'middleware' => 'api',
+    'middleware' => ['api','cors'],
     'prefix' => 'user',
 ], function ($router) {
 
@@ -29,7 +29,7 @@ Route::group([
 
 // Authentication for employer
 Route::group([
-    'middleware' => 'api',
+    'middleware' => ['api','cors'],
     'prefix' => 'employer',
 ], function ($router) {
 
