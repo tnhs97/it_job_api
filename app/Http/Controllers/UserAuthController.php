@@ -48,26 +48,15 @@ class UserAuthController extends Controller
      * @param Illuminate\Http\Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function parse_qs($data)
-    {
-        $data = preg_replace_callback('/(?:^|(?<=&))[^=[]+/', function ($match) {
-            return bin2hex(urldecode($match[0]));
-        }, $data);
-
-        parse_str($data, $values);
-
-        return array_combine(array_map('hex2bin', array_keys($values)), $values);
-    }
 
     public function login(Request $request)
     {
-        // $credentials = $request->only(['email', 'password']);
+        $credentials = $request->only(['email', 'password']);
 
         // if (!$token = auth()->attempt($credentials)) {
         //     return response()->json(['error' => 'Unauthorized'], 401);
         // }
-        $data = UserAuthController::parse_qs($request);
-        return response()->json(['a' => $request->email, 'b' => $request->all(), 'c' => $request->data]);
+        return response()->json(['a' => $credentials, 'b' => $request, 'c' => $request->data]);
         return $this->respondWithToken($token);
     }
     /**
