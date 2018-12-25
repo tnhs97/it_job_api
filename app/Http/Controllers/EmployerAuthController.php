@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Account;
 use App\Employer;
-use App\User;
+use App\Http\Resources\Employer as EmployerResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class AuthController extends Controller
+class EmployerAuthController extends Controller
 {
     /**
      * Create a new AuthController instance.
@@ -17,7 +17,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login','register']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register']]);
     }
     /**
      * Register a new account.
@@ -32,20 +32,15 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => bcrypt($request->password),
         ]);
-        if ($request->accountable_type == 'User') {
-            $user = User::firstOrCreate([
-                'name' => $request->name,
-            ]);
-            $user->account()->firstOrCreate($account);
-        } else {
-            $employer = Employer::firstOrCreate([
-                'name' => $request->name,
-                'description' => $request->description,
-                'id_location' => $request->id_location,
 
-            ]);
-            $employer->account()->firstOrCreate($account);
-        }
+        $employer = Employer::firstOrCreate([
+            'name' => $request->name,
+            'description' => $request->description,
+            'id_location' => $request->id_location,
+        ]);
+        
+        $employer->account()->firstOrCreate($account);
+
         $account = new Account($account);
         $token = auth()->login($account);
 
@@ -69,16 +64,18 @@ class AuthController extends Controller
         return $this->respondWithToken($token);
     }
     /**
-     * Get the authenticated User.
+     * Get the authenticated Employer.
      *
      * @return \Illuminate\Http\JsonResponse
      */
     public function me()
     {
-        return response()->json(auth()->user());
+        $employer = Employer::findOrFail(auth()->user()->accountable_id);
+
+        return new EmployerResource($employer);
     }
     /**
-     * Log the user out (Invalidate the token).
+     * Log the employer out (Invalidate the token).
      *
      * @return \Illuminate\Http\JsonResponse
      */
