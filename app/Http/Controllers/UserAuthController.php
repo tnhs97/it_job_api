@@ -3,11 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Account;
-use App\Employer;
-use App\User;
 use App\Http\Resources\User as UserResource;
-use App\Http\Resources\Account as AccountResource;
-use App\Http\Resources\Employer as EmployerResource;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -35,20 +32,10 @@ class UserAuthController extends Controller
             'email' => $request->email,
             'password' => bcrypt($request->password),
         ]);
-        if ($request->accountable_type == 'User') {
-            $user = User::firstOrCreate([
-                'name' => $request->name,
-            ]);
-            $user->account()->firstOrCreate($account);
-        } else {
-            $employer = Employer::firstOrCreate([
-                'name' => $request->name,
-                'description' => $request->description,
-                'id_location' => $request->id_location,
-
-            ]);
-            $employer->account()->firstOrCreate($account);
-        }
+        $user = User::firstOrCreate([
+            'name' => $request->name,
+        ]);
+        $user->account()->firstOrCreate($account);
         $account = new Account($account);
         $token = auth()->login($account);
 
