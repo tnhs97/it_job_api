@@ -29,7 +29,7 @@ class UserAuthController extends Controller
     {
 
         $account = ([
-            'email' => $request->email,
+            'email' => $request->email, 
             'password' => bcrypt($request->password),
         ]);
         $user = User::firstOrCreate([
@@ -52,8 +52,9 @@ class UserAuthController extends Controller
     {
         $credentials = $request->only(['email', 'password']);
 
+        echo($credentials);
         if (!$token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return response()->json(['error' => $credentials], 401);
         }
 
         return $this->respondWithToken($token);
