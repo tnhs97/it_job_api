@@ -15,4 +15,8 @@ class Employer extends Model
         return $this->morphOne('App\Account', 'accountable');
     }
 
+    public function location(){
+        return $this->belongsTo('App\Location','id_Location','id');
+    }
+
 }
