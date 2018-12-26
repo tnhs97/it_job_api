@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Helpers\MyHelpers;
 use App\Location;
 use App\Post;
 use App\Skill;
 use Illuminate\Http\Request;
-use App\Http\Helpers\MyHelpers;
+
 class PostFilterController extends Controller
 {
     /**
@@ -29,17 +30,13 @@ class PostFilterController extends Controller
 
         $post = PostFilterController::getPostByLocationOrSkill($skill, $location);
 
-        if ($order_dir == 'asc') {
-            $post = $post->sortBy($order_by)->values()->all();
-        } else {
-            $post = $post->sortByDecs($order_by)->values()->all();
-        }
-        $post = MyHelpers::paginateCollection($post,2);
+        $post = PostFilterController::sortPost($post, $order_by, $order_dir);
+        $post = MyHelpers::paginateCollection($post, 10);
         return response()->json($post);
 
     }
 
-    public function getPostByLocationOrSkill(string $skill, string $location)
+    public function getPostByLocationOrSkill($skill, $location)
     {
         if (($skill === 'all') and ($location === 'all')) {
             $post = Post::all();
@@ -59,11 +56,16 @@ class PostFilterController extends Controller
 
     }
 
-    public function paginateCollection($items, $perPage = 15, $page = null, $options = [])
+    public function sortPost( $post, $order_by, $order_dir)
     {
-        $page = $page ?: (\Illuminate\Pagination\Paginator::resolveCurrentPage() ?: 1);
-        $items = $items instanceof \Illuminate\Support\Collection ? $items : \Illuminate\Support\Collection::make($items);
-        return new \Illuminate\Pagination\LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
+        if (($order_by != null) and ($order_by != "")) {
+            if ($order_dir == 'asc') {
+                $post = $post->sortBy($order_by)->values()->all();
+            } elseif ($order_dir == 'dec') {
+                $post = $post->sortByDecs($order_by)->values()->all();
+            }
+        }
+        return $post;
     }
 
 }
