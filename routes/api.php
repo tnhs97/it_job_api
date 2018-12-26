@@ -40,3 +40,6 @@ Route::group([
     Route::post('me', 'EmployerAuthController@me');
 
 });
+
+//Post Filter
+Route::get('post/filter', 'PostFilterController@filter');

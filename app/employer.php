@@ -19,4 +19,8 @@ class Employer extends Model
         return $this->belongsTo('App\Location','id_Location','id');
     }
 
+    public function posts(){
+        return $this->hasMany('App\Post','id_employer','id');
+    }
+
 }
