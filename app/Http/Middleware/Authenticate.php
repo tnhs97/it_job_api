@@ -14,6 +14,6 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
-        return response()->json(['error' => 'Forbidden'], 403);
+        return response()->json(['error' => 'Method Not Allowed'], 405);
     }
 }
