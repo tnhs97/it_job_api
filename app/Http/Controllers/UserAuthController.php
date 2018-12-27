@@ -53,9 +53,8 @@ class UserAuthController extends Controller
     {
         $credentials = $request->only(['email', 'password', 'accountable_type'=>'App\User']);
         $remember_me = $request->remember_me;
-        
-        if (!$token = auth()->attempt($credentials) && 
-        (auth()->user()->accountable_type=="App\User")) {
+        $token = auth()->attempt($credentials);
+        if ((!$token) && (auth()->user()->accountable_type=="App\User")) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
         if ($remember_me === '1') {
