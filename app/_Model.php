@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class _Model extends Model
+class Table extends Illuminate\Database\Eloquent\Model
 {
     protected $table = 'models';
     public function actions()

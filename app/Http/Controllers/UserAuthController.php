@@ -35,7 +35,7 @@ class UserAuthController extends Controller
         $user = User::firstOrCreate([
             'name' => $request->name,
         ]);
-        $user->account()->firstOrCreate($account);
+        $user->account()->save($account);
         $account = new Account($account);
         $token = auth()->login($account);
 
@@ -54,7 +54,8 @@ class UserAuthController extends Controller
         $credentials = $request->only(['email', 'password', 'accountable_type'=>'App\User']);
         $remember_me = $request->remember_me;
         
-        if (!$token = auth()->claims(['accountable_type' => 'App\User'])->attempt($credentials)) {
+        if (!$token = auth()->attempt($credentials) && 
+        (auth()->user()->accountable_type=="App\User")) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
         if ($remember_me === '1') {
@@ -100,6 +101,7 @@ class UserAuthController extends Controller
      */
     public function refresh(Request $request)
     {
+        return response()->json($request->all());
         $user = Account::findOrFail($request->account_id);
         if ($user->remember_token == $request->remember_token) {
             return $this->respondWithToken(auth()->login($user));

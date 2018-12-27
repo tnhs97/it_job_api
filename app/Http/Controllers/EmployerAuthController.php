@@ -58,7 +58,8 @@ class EmployerAuthController extends Controller
         $credentials = $request->only(['email', 'password']);
         $remember_token = $request->remember_token;
 
-        if (!$token = auth()->attempt($credentials)) {
+        if (!$token = auth()->attempt($credentials) && 
+        (auth()->user()->accountable_type=="App\Employer")) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
         if ($remember_token === '1') {
