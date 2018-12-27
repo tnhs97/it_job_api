@@ -1,12 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Employer;
+use App\Http\Resources\Employer as EmployerResource;
 
-use App\User;
-use App\Http\Resources\User as UserResource;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class EmployerController extends Controller
 {
     public function __construct()
     {
@@ -36,10 +36,10 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\User  $user
+     * @param  \App\Employer  $employer
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(Employer $employer)
     {
         //
     }
@@ -48,37 +48,27 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User  $user
+     * @param  \App\Employer  $employer
      * @return \Illuminate\Http\Response
      */
-    public function me(Request $request, User $user)
+    public function me(Request $request)
     {
-        // check if currently authenticated user is the owner of the book
+        // check if currently authenticated employer is the owner of the book
         $id = auth()->user()->accountable_id;
-        $user = User::findOrFail($id); 
+        $employer = Employer::findOrFail($id); 
         // $data = $request->get('name','CV','cover_letter','image');
 
         // collect($data);
-        $user->fill([
+        $employer->fill([
             "name" => $request->name,
-            "CV" => $request->CV,
-            "cover_letter" => $request->cover_letter,
-            "image" => $request->image,
+            "Description" =>$request->description,
+            "id_location" => $request->id_location,
+            "url_avatar" => $request->url_avatar,
+            "url_bia" => $request->url_bia,
         ]);
-        $user->save();
+        $employer->save();
         // return response()->json($request->has("name"));
-        return new UserResource($user);
+        return new EmployerResource($employer);
 
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(User $user)
-    {
-        //
     }
 }

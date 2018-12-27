@@ -24,6 +24,7 @@ Route::group([
     Route::post('logout', 'UserAuthController@logout');
     Route::post('refresh', 'UserAuthController@refresh');
     Route::post('me', 'UserAuthController@me');
+    Route::put('me', 'UserController@me');
 
 });
 
@@ -38,6 +39,8 @@ Route::group([
     Route::post('logout', 'EmployerAuthController@logout');
     Route::post('refresh', 'EmployerAuthController@refresh');
     Route::post('me', 'EmployerAuthController@me');
+    Route::put('me', 'EmployerController@me');
+
 
 });
 

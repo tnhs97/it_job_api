@@ -34,4 +34,9 @@ class Account extends Authenticatable implements JWTSubject
         return $this->belongsToMany('App\Group');
     }
 
+    public function setRememberToken($value)
+    {
+      return Illuminate\Auth\Authenticatable::setRememberToken($value);
+    }
+
 }

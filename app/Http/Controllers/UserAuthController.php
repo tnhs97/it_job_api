@@ -17,7 +17,7 @@ class UserAuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'register']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register', 'refresh']]);
     }
     /**
      * Register a new account.
@@ -51,10 +51,16 @@ class UserAuthController extends Controller
 
     public function login(Request $request)
     {
-        $credentials = $request->only(['email', 'password']);
-
-        if (!$token = auth()->attempt($credentials)) {
+        $credentials = $request->only(['email', 'password', 'accountable_type'=>'App\User']);
+        $remember_me = $request->remember_me;
+        
+        if (!$token = auth()->claims(['accountable_type' => 'App\User'])->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
+        }
+        if ($remember_me === '1') {
+            auth()->user()->fill([
+                'remember_token' => str_random(100),
+            ])->save();
         }
 
         return $this->respondWithToken($token);
@@ -79,8 +85,26 @@ class UserAuthController extends Controller
 
     public function logout(Request $request)
     {
+        auth()->user()->fill([
+            'remember_token' => null,
+        ])->save();
         auth()->logout();
         return response()->json(['message' => 'Successfully logged out']);
+
+    }
+
+    /**
+     * Refresh a token.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function refresh(Request $request)
+    {
+        $user = Account::findOrFail($request->account_id);
+        if ($user->remember_token == $request->remember_token) {
+            return $this->respondWithToken(auth()->login($user));
+        }
+        return response()->json(['error' => 'Unauthorized'], 401);
 
     }
 
@@ -93,10 +117,19 @@ class UserAuthController extends Controller
      */
     protected function respondWithToken($token)
     {
+        if (auth()->user()->remember_token != null) {
+            return response()->json([
+                'access_token' => $token,
+                'token_type' => 'bearer',
+                'expires_in' => auth()->factory()->getTTL() * 60,
+                'account_id' => auth()->user()->id,
+                'remember_token' => auth()->user()->remember_token,
+            ]);}
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60,
         ]);
+
     }
 }
