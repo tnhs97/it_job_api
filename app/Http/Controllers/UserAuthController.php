@@ -101,7 +101,7 @@ class UserAuthController extends Controller
      */
     public function refresh(Request $request)
     {
-        return response()->json($request->all()->account_id);
+        return response()->json($request->account_id);
         
         $user = Account::findOrFail((int)$request->account_id);
         if ($user->remember_token == $request->remember_token) {
