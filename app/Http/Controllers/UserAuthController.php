@@ -28,7 +28,7 @@ class UserAuthController extends Controller
     public function register(Request $request)
     {
 
-        $account = ([
+        $account = new Account([
             'email' => $request->email,
             'password' => bcrypt($request->password),
         ]);
@@ -36,7 +36,6 @@ class UserAuthController extends Controller
             'name' => $request->name,
         ]);
         $user->account()->save($account);
-        $account = new Account($account);
         $token = auth()->login($account);
 
         return $this->respondWithToken($token);

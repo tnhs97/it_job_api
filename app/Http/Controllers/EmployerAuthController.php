@@ -28,7 +28,7 @@ class EmployerAuthController extends Controller
     public function register(Request $request)
     {
 
-        $account = ([
+        $account = new Account([
             'email' => $request->email,
             'password' => bcrypt($request->password),
         ]);
@@ -39,9 +39,8 @@ class EmployerAuthController extends Controller
             'id_location' => $request->id_location,
         ]);
         
-        $employer->account()->firstOrCreate($account);
+        $employer->account()->save($account);
 
-        $account = new Account($account);
         $token = auth()->login($account);
 
         return $this->respondWithToken($token);
