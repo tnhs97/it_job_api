@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Group extends Model
 {
-    public function action_models()
+    public function rights()
     {
-        return $this->belongsToMany('App\Action_Model','group_action_model','group_id','action_model_id');
+        return $this->belongsToMany('App\Right','group_right','group_id','right_id')->withPivot('is_active');
     }
 
     public function accounts()
     {
-        return $this->belongsToMany('App\Account');
+        return $this->belongsToMany('App\Account')->withPivot('is_active');
     }
 
 }

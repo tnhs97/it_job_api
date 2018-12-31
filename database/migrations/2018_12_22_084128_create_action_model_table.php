@@ -12,12 +12,12 @@ class CreateActionModelTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('action_model', function(Blueprint $table)
+		Schema::create('right', function(Blueprint $table)
 		{
 			$table->integer('id', true);
 			$table->integer('model_id');
 			$table->integer('action_id');
-			$table->boolean('is_active');
+			$table->boolean('is_active')->default(true);
 		});
 	}
 
@@ -29,7 +29,7 @@ class CreateActionModelTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::dropIfExists('action_model');
+		Schema::dropIfExists('right');
 	}
 
 }

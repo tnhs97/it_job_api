@@ -8,7 +8,8 @@ class Action extends Model
 {
     public function models()
     {
-        return $this->belongsToMany('App\_Model','action_model','action_id','model_id');
+        return $this->belongsToMany('App\Table','right','action_id','model_id')
+        ->using('App\Right')->withPivot('is_active');
     }
 
 }

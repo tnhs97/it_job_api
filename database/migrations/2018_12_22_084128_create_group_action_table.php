@@ -12,12 +12,12 @@ class CreateGroupActionTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('group_action_model', function(Blueprint $table)
+		Schema::create('group_right', function(Blueprint $table)
 		{
 			$table->integer('id', true);
 			$table->integer('group_id');
-			$table->integer('action_model_id');
-			$table->boolean('is_active');
+			$table->integer('right_id');
+			$table->boolean('is_active')->default(true);
 		});
 	}
 
@@ -29,7 +29,7 @@ class CreateGroupActionTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::dropIfExists('group_action_model');
+		Schema::dropIfExists('group_right');
 	}
 
 }

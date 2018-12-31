@@ -29,14 +29,11 @@ class Account extends Authenticatable implements JWTSubject
     {
       return [];
     }
+    
     public function groups()
     {
-        return $this->belongsToMany('App\Group');
+        return $this->belongsToMany('App\Group')->withPivot('is_active');
     }
 
-    public function setRememberToken($value)
-    {
-      return Illuminate\Auth\Authenticatable::setRememberToken($value);
-    }
 
 }

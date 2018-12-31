@@ -17,7 +17,7 @@ class CreateAccountGroupTable extends Migration {
 			$table->integer('id', true);
 			$table->integer('account_id');
 			$table->integer('group_id');
-			$table->boolean('is_active');
+			$table->boolean('is_active')->default(true);
 		});
 	}
 
